@@ -8,6 +8,6 @@ public record ErrorModelResponse(
     String messsage,
     @Size(min = 100, max = 600)
     @NotBlank
-    Integer code
+    String code
 ) {
 }
