@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.jboss.logging.annotations.Param;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -21,6 +22,32 @@ public class UserResources {
         var response = new UsuarioResponse(UUID.randomUUID().toString(), request.nombre(), null,  request.email(), null, request.cedula(), null, request.password(), request.user(), null, request.roles());
         //TODO cambiar por Response.create
         return Response.status(Response.Status.CREATED).entity(response).build();
+    }
+
+    @GET
+    public Response obtenerUsuarios(@Valid @QueryParam("offset") @DefaultValue("0") Integer offset, @QueryParam("limit") @DefaultValue("20") Integer limit) {
+
+        var usuarios = new ArrayList<UsuarioResponse>();
+
+        for (int i = (offset * limit); i < (limit + offset * limit); i++) {
+            usuarios.add(
+                    new UsuarioResponse(
+                            "id: "+i,
+                            "nombre "+i,
+                            "apellido "+i,
+                            "email "+i,
+                            "semestre 2",
+                            "cedula "+i,
+                            "telefono "+i,
+                            "password "+i,
+                            "user "+i,
+                            "edad "+i,
+                            null
+                            )
+            );
+        }
+
+        return Response.status(Response.Status.CREATED).entity(usuarios).build();
     }
 
     @Path("/{id}")
