@@ -24,8 +24,8 @@ public record UsuarioCreadoRequest(
         @NotBlank(message = "El usuario es requerido")
         String user,
         @NotBlank(message = "La contraseña es requerida")
-        @Pattern(regexp = "^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")
-        @Size(message = "La longitud minima es de 8")
+        @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")
+        @Size(min = 8, message = "La longitud minima es de 8")
         String password,
         Collection<Rol> roles
 ) {
