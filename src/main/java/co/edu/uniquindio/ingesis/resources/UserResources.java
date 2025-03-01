@@ -2,10 +2,12 @@ package co.edu.uniquindio.ingesis.resources;
 
 import co.edu.uniquindio.ingesis.dtos.UsuarioCreadoRequest;
 import co.edu.uniquindio.ingesis.dtos.UsuarioResponse;
+import co.edu.uniquindio.ingesis.services.interfaces.UserService;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,7 +17,10 @@ import java.util.UUID;
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@RequiredArgsConstructor
 public class UserResources {
+
+    final UserService userService;
 
     @POST
     public Response create(@Valid UsuarioCreadoRequest request) {
