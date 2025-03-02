@@ -2,16 +2,16 @@ package co.edu.uniquindio.ingesis.services.interfaces;
 
 import co.edu.uniquindio.ingesis.domain.User;
 import co.edu.uniquindio.ingesis.dtos.PaginacionRequest;
-import co.edu.uniquindio.ingesis.dtos.UsuarioCreadoRequest;
-import co.edu.uniquindio.ingesis.dtos.UsuarioResponse;
+import co.edu.uniquindio.ingesis.dtos.UserRegistrationRequest;
+import co.edu.uniquindio.ingesis.dtos.UserResponse;
 
 import java.util.ArrayList;
 
 public interface UserService {
-    UsuarioResponse createUser(UsuarioCreadoRequest request);
-    UsuarioResponse obtenerUser(Long id);
+    UserResponse createUser(UserRegistrationRequest request);
+    UserResponse obtenerUser(Long id);
     String eliminarUser(Long id);
-    UsuarioResponse actualizarUser(UsuarioCreadoRequest request);
+    UserResponse actualizarUser(UserRegistrationRequest request);
     ArrayList<User> obtenerUsers(PaginacionRequest request);
 
 }

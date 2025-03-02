@@ -2,8 +2,8 @@ package co.edu.uniquindio.ingesis.services.implementation;
 
 import co.edu.uniquindio.ingesis.domain.User;
 import co.edu.uniquindio.ingesis.dtos.PaginacionRequest;
-import co.edu.uniquindio.ingesis.dtos.UsuarioCreadoRequest;
-import co.edu.uniquindio.ingesis.dtos.UsuarioResponse;
+import co.edu.uniquindio.ingesis.dtos.UserRegistrationRequest;
+import co.edu.uniquindio.ingesis.dtos.UserResponse;
 import co.edu.uniquindio.ingesis.mappers.UserMapper;
 import co.edu.uniquindio.ingesis.services.interfaces.UserService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -19,12 +19,12 @@ public class UserServiceImpl implements UserService {
     final UserMapper userMapper;
 
     @Transactional
-    public UsuarioResponse createUser(UsuarioCreadoRequest request) {
+    public UserResponse createUser(UserRegistrationRequest request) {
         return null;
     }
 
     @Override
-    public UsuarioResponse obtenerUser(Long id) {
+    public UserResponse obtenerUser(Long id) {
         return null;
     }
 
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UsuarioResponse actualizarUser(UsuarioCreadoRequest request) {
+    public UserResponse actualizarUser(UserRegistrationRequest request) {
         return null;
     }
 

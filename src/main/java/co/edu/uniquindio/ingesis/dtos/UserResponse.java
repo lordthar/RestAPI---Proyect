@@ -6,9 +6,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
-public record UsuarioResponse(
+public record UserResponse(
         @NotBlank(message = "El id es requerido")
         String id,
         @NotBlank(message = "El nombre es requerido")
@@ -29,7 +30,7 @@ public record UsuarioResponse(
         @Size(min=4,max = 20,message = "El username debe tener mínimo 4 caracteres y máximo 20")
         @NotBlank(message = "El user es requerido")
         String user,
-        String edad,
+        LocalDate fechaNacimiento,
         Collection<Rol> roles
 ) {
 }

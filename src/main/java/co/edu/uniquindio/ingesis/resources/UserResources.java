@@ -1,7 +1,7 @@
 package co.edu.uniquindio.ingesis.resources;
 
-import co.edu.uniquindio.ingesis.dtos.UsuarioCreadoRequest;
-import co.edu.uniquindio.ingesis.dtos.UsuarioResponse;
+import co.edu.uniquindio.ingesis.dtos.UserRegistrationRequest;
+import co.edu.uniquindio.ingesis.dtos.UserResponse;
 import co.edu.uniquindio.ingesis.services.interfaces.UserService;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -9,6 +9,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -23,9 +24,9 @@ public class UserResources {
     final UserService userService;
 
     @POST
-    public Response create(@Valid UsuarioCreadoRequest request) {
+    public Response create(@Valid UserRegistrationRequest request) {
 
-        var response = new UsuarioResponse(UUID.randomUUID().toString(), request.nombre(), null,  request.email(), null, request.cedula(), null, request.password(), request.user(), null, request.roles());
+        var response = new UserResponse(UUID.randomUUID().toString(), request.nombre(), null,  request.email(), null, request.cedula(), null, request.password(), request.user(), null, request.roles());
         //TODO cambiar por Response.create
         return Response.status(Response.Status.CREATED).entity(response).build();
     }
@@ -33,11 +34,11 @@ public class UserResources {
     @GET
     public Response obtenerUsuarios(@Valid @QueryParam("offset") @DefaultValue("0") Integer offset, @QueryParam("limit") @DefaultValue("20") Integer limit) {
 
-        var usuarios = new ArrayList<UsuarioResponse>();
+        var usuarios = new ArrayList<UserResponse>();
 
         for (int i = (offset * limit); i < (limit + offset * limit); i++) {
             usuarios.add(
-                    new UsuarioResponse(
+                    new UserResponse(
                             "id: "+i,
                             "nombre "+i,
                             "apellido "+i,
@@ -47,7 +48,7 @@ public class UserResources {
                             "telefono "+i,
                             "password "+i,
                             "user "+i,
-                            "edad "+i,
+                            LocalDate.now(),
                             null
                             )
             );
@@ -58,20 +59,20 @@ public class UserResources {
 
     @Path("/{id}")
     @PUT
-    public Response actualizar(@Valid UsuarioCreadoRequest request, @PathParam("id") String id) {
+    public Response actualizar(@Valid UserRegistrationRequest request, @PathParam("id") String id) {
         // aquí va la logica
-        var response = new UsuarioResponse(id, request.nombre(), null,  request.email(), null, request.cedula(), null, request.password(), request.user(), null, request.roles());
+        var response = new UserResponse(id, request.nombre(), null,  request.email(), null, request.cedula(), null, request.password(), request.user(), null, request.roles());
 
         return Response.status(Response.Status.OK).entity(response).build();
     }
 
-    private List<UsuarioResponse> usuarios = new ArrayList<>();
+    private List<UserResponse> usuarios = new ArrayList<>();
     @Path("/{id}")
     @DELETE
     public Response delete(@PathParam("id") String id) {
-        Iterator<UsuarioResponse> iterator = usuarios.iterator();
+        Iterator<UserResponse> iterator = usuarios.iterator();
         while (iterator.hasNext()) {
-            UsuarioResponse usuario = iterator.next();
+            UserResponse usuario = iterator.next();
             if(usuario.id().equals(id)) {
                 iterator.remove();
             }
@@ -82,7 +83,7 @@ public class UserResources {
     @Path("/{id}")
     @GET
     public Response obtenerUsuario(@PathParam("id") String id){
-        UsuarioResponse usuario = new UsuarioResponse(
+        UserResponse usuario = new UserResponse(
                 id,
                 "Juan",
                 "Perez",
@@ -92,9 +93,9 @@ public class UserResources {
                 "3222334354",
                 "Aaa@6789aaA-",
                 "juanito",
-                "38",
+                LocalDate.now(),
                 null);
-        for (UsuarioResponse user: usuarios){
+        for (UserResponse user: usuarios){
             if (user.id().equals(id)){
                 usuario = user;
             }
@@ -104,8 +105,8 @@ public class UserResources {
 
     @PATCH
     @Path("/{id}")
-    public Response update(@PathParam("id") String id, @Valid UsuarioCreadoRequest request) {
-        var response = new UsuarioResponse(id, request.nombre(), null,  request.email(), null, request.cedula(), null, request.password(), request.user(), null, request.roles());
+    public Response update(@PathParam("id") String id, @Valid UserRegistrationRequest request) {
+        var response = new UserResponse(id, request.nombre(), null,  request.email(), null, request.cedula(), null, request.password(), request.user(), null, request.roles());
 
 
         return Response.status(Response.Status.OK).entity(response).build();

@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-public record UsuarioCreadoRequest(
+public record UserRegistrationRequest(
         @NotBlank(message = "El nombre es requerido")
         String nombre,
         @NotBlank(message = "El apellido es requerido")
@@ -29,7 +29,7 @@ public record UsuarioCreadoRequest(
         String password,
         Collection<Rol> roles
 ) {
-    public UsuarioCreadoRequest {
+    public UserRegistrationRequest {
         roles = Objects.requireNonNullElse(roles,List.of(Rol.USER));
     }
 }

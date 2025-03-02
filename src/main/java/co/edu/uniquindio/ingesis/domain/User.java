@@ -1,11 +1,12 @@
 package co.edu.uniquindio.ingesis.domain;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "user")
@@ -21,5 +22,5 @@ public class User extends PanacheEntity {
     private String telefono;
     private String password;
     private String User;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
 }
